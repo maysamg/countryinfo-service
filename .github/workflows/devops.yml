@@ -1,0 +1,64 @@
+name: DevopsWF
+
+on:
+  push:
+    branches: [main, devops]
+
+jobs:
+  # Job 1: Kjører tester
+  Testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Henter koden fra repoet
+        uses: actions/checkout@v3
+
+      - name: Installerer Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Kjører tester
+        run: go test ./...
+
+  # Job 2: Bygger Go-applikasjonen
+  Build:
+    runs-on: ubuntu-latest
+    needs: Testing  # Må vente til Testing er ferdig
+    steps:
+      - name: Henter koden fra repoet
+        uses: actions/checkout@v3
+
+      - name: Installerer Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Bygger applikasjonen
+        run: go build -o countryinfo-app .
+
+      - name: Lagrer bygget som artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: countryinfo-app
+          path: countryinfo-app
+
+  # Job 3: Automatisk deployment hvis alt fungerer
+  DeployProdCode:
+    runs-on: ubuntu-latest
+    needs: Build  # Må vente til Build er ferdig
+    steps:
+      - name: Henter koden fra repoet
+        uses: actions/checkout@v3
+
+      - name: Konfigurer Git-bruker
+        run: |
+          git config --local user.name "maysamg"
+          git config --local user.email "din-epost@example.com"
+
+      - name: Push endringer til `main`
+        run: |
+          git fetch --unshallow 
+          git checkout main 
+          git pull origin main 
+          git merge --no-ff devops -m "Auto-merge devops back to main"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/maysamg/countryinfo-service.git main
