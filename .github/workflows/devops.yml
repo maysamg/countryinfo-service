@@ -53,7 +53,7 @@ jobs:
       - name: Konfigurer Git-bruker
         run: |
           git config --local user.name "maysamg"
-          git config --local user.email "din-epost@example.com"
+          git config --local user.email "maysamg@stud.ntnu.no"
 
       - name: Push endringer til `main`
         run: |
