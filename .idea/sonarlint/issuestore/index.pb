@@ -15,3 +15,7 @@ B
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 G
 countryinfo-service.iml,1\4\14b88c71c2b3f3863cea06d3999e6e7422c91aa9
+O
+.github/workflows/devops.yml.go,1\7\17b98d1cf034ce107ecd541879ec27850f024f49
+L
+.github/workflows/devops.yml,5\2\5274a11dcc875b309216cb17736f51a3f958cdfc
