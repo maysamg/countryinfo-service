@@ -42,23 +42,26 @@ jobs:
           name: countryinfo-app
           path: countryinfo-app
 
-  # Job 3: Automatisk deployment hvis alt fungerer
-  DeployProdCode:
+  # Job 3: Automatisk deployment til GitLab
+  DeployToGitLab:
     runs-on: ubuntu-latest
     needs: Build  # Må vente til Build er ferdig
     steps:
-      - name: Henter koden fra repoet
+      - name: Henter koden fra GitHub
         uses: actions/checkout@v3
 
       - name: Konfigurer Git-bruker
         run: |
-          git config --local user.name "maysamg"
-          git config --local user.email "maysamg@stud.ntnu.no"
+          git config --global user.name "maysamg"
+          git config --global user.email "maysamg@stud.ntnu.no"
 
-      - name: Push endringer til `main`
+      - name: Legger til GitLab som remote
         run: |
-          git fetch --unshallow 
-          git checkout main 
-          git pull origin main 
-          git merge --no-ff devops -m "Auto-merge devops back to main"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/maysamg/countryinfo-service.git main
+          git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@git.gvk.idi.ntnu.no/course/prog2005/prog2005-2025-workspace/maysamg/assignment-1.git
+
+      - name: Pusher til GitLab
+        run: |
+          git fetch --unshallow
+          git checkout main
+          git pull origin main
+          git push --force gitlab main
