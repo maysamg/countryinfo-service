@@ -65,3 +65,9 @@ jobs:
           git checkout main
           git pull origin main
           git push --force gitlab main
+
+          # Pusher også devops til GitLab
+          git checkout devops
+          git pull origin devops
+          git push --force gitlab devops
+      
