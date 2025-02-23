@@ -1,10 +1,11 @@
 # Testing av endepunkter
 
-Dette dokumentet beskriver hvordan du kan teste API-et og de ulike endepunktene.
+Dette dokumentet beskriver hvordan du kan teste API-et både **lokalt** og på **Render (Cloud Agent)**.
+
 
 ##  Før testing
 
-1. Start serveren ved å kjøre følgende kommando i terminalen:
+1. Ved lokal testing, start serveren ved å kjøre følgende kommando i terminalen:
    ```
    go run main.go
    ```
@@ -14,7 +15,7 @@ Dette dokumentet beskriver hvordan du kan teste API-et og de ulike endepunktene.
    http://localhost:8080
    ```
 
-## Testing av API-endepunkter
+## Testing av API-endepunkter lokalt og på Render
 
 ### 1. Hent landinformasjon
 - Endpoint: `/countryinfo/v1/info/{landkode}`
@@ -22,12 +23,20 @@ Dette dokumentet beskriver hvordan du kan teste API-et og de ulike endepunktene.
   ```
   http://localhost:8080/countryinfo/v1/info/no
   ```
+    - Eksempel-URL-Render:
+  ```
+  https://countryinfo-service.onrender.com/countryinfo/v1/info/no
+  ```
 ### 2. Hent befolkningsdata
 - **Endpoint:** `/countryinfo/v1/population/{landkode}?limit={startår}-{sluttår}`
 - **Eksempel-URL:**
   ```
   http://localhost:8080/countryinfo/v1/population/no?limit=2010-2015
   ```
+    - **Eksempel-URL-Render:**
+  ```
+  https://countryinfo-service.onrender.com/countryinfo/v1/population/no?limit=2010-2015
+    ```
 
 ### 3. Hent API-status
 - **Endpoint:** `/countryinfo/v1/status/`
@@ -35,6 +44,10 @@ Dette dokumentet beskriver hvordan du kan teste API-et og de ulike endepunktene.
   ```
   http://localhost:8080/countryinfo/v1/status/
   ```
+    - **Eksempel-URL-Render:**
+  ```
+  https://countryinfo-service.onrender.com/countryinfo/v1/status/
+    ```
 - **Beskrivelse:** Gir en statusrapport for API-ene som brukes, inkludert uptime.
 
 
