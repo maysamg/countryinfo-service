@@ -23,6 +23,7 @@ func main() {
 	http.HandleFunc("/countryinfo/v1/info/", internal.InfoHandler)
 	http.HandleFunc("/countryinfo/v1/population/", internal.PopulationHandler)
 	http.HandleFunc("/countryinfo/v1/status/", internal.StatusHandler)
+	http.HandleFunc("/", internal.RootHandler) // Legger til root-handler
 
 	// Start serveren
 	log.Println("Starter serveren på port " + port)

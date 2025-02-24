@@ -11,6 +11,20 @@ import (
 	"time"
 )
 
+// **
+// RootHandler håndterer forespørsler til "/"
+func RootHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprintln(w, "<h1>Welcome to the Country Info API!</h1>")
+	fmt.Fprintln(w, "<p>Use the following endpoints to get data:</p>")
+	fmt.Fprintln(w, "<ul>")
+	fmt.Fprintln(w, "<li><a href='/countryinfo/v1/info/no'>/countryinfo/v1/info/{country_code}</a> - Get country info</li>")
+	fmt.Fprintln(w, "<li><a href='/countryinfo/v1/population/no'>/countryinfo/v1/population/{country_code}</a> - Get population data</li>")
+	fmt.Fprintln(w, "<li><a href='/countryinfo/v1/status'>/countryinfo/v1/status</a> - Check API status</li>")
+	fmt.Fprintln(w, "</ul>")
+	fmt.Fprintln(w, "<p>Enjoy using the API!</p>")
+}
+
 // InfoHandler håndterer forespørsler til /countryinfo/v1/info/
 func InfoHandler(w http.ResponseWriter, r *http.Request) {
 	// Ekstraher landkoden fra URL
