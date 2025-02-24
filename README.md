@@ -14,6 +14,9 @@ Dette dokumentet beskriver hvordan du kan teste API-et både **lokalt** og på *
    ```
    http://localhost:8080
    ```
+##  Viktig informasjon
+⚠ **Render bruker en gratis instans som kan gå i dvale etter 15 min.**  
+Hvis API-et ikke svarer med én gang, prøv igjen etter noen sekunder:)
 
 ## Testing av API-endepunkter lokalt og på Render
 
